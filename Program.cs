@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using ATM_BusinessDataLogic;
 
 namespace ITCSharpIntro
 {
     internal class Program
     {
         static string[] actions = new string[] { "[1] View Balance", "[2] Withdraw", "[3] Deposit", "[4] Exit" };
-        static double balance = 10000.0;
 
         static void Main(string[] args)
         {
             Console.WriteLine("WELCOME");
 
-            int pin = 1234;
             int userPin = 0;
 
             do
@@ -20,12 +19,12 @@ namespace ITCSharpIntro
                 Console.Write("Enter PIN: ");
                 userPin = Convert.ToInt16(Console.ReadLine());
 
-                if (userPin != pin)
+                if (!ATMProcess.ValidatePIN(userPin))
                 {
                     Console.WriteLine("FAILED: Incorrect PIN. Please try again.");
                 }
 
-            } while (userPin != pin);
+            } while (!ATMProcess.ValidatePIN(userPin));
 
             DisplayActions();
             int userInput = GetUserInput();
@@ -75,29 +74,10 @@ namespace ITCSharpIntro
             return userInput;
         }
 
-        static void UpdateBalance(int userAction, double amount) //method parameter 
-        {
-            if (userAction == 2) //withdraw
-            {
-                if (amount <= balance)
-                {
-                    balance -= amount;
-                }
-                else
-                {
-                    Console.WriteLine("Insufficient balance. Please enter smaller amount.");
-                }
-            }
-
-            if (userAction == 3) //deposit
-            {
-                balance += amount;
-            }
-        }
-
+        
         static void DisplayBalance()
         {
-            Console.WriteLine($"AVAILABLE BALANCE: {balance}");
+            Console.WriteLine($"AVAILABLE BALANCE: {ATMProcess.balance}");
         }
 
         static void Withdraw()
@@ -107,8 +87,16 @@ namespace ITCSharpIntro
             Console.WriteLine("Enter amount to WITHDRAW");
             double toWithdraw = Convert.ToDouble(GetUserInput());
 
-            UpdateBalance(2, toWithdraw);
-            DisplayBalance();
+            if (ATMProcess.CheckAmountToWithdraw(toWithdraw))
+            {
+                ATMProcess.UpdateBalance(Actions.Withdraw, toWithdraw);
+            }
+            else
+            {
+                Console.WriteLine("ERROR: Either balance is insufficient or you need to enter amount 500 and above.");
+            }
+
+                DisplayBalance();
         }
 
         static void Deposit()
@@ -117,7 +105,7 @@ namespace ITCSharpIntro
             Console.WriteLine("DEPOSIT MONEY");
             Console.WriteLine("Enter amount to DEPOSIT");
             double toDeposit = Convert.ToDouble(GetUserInput());
-            UpdateBalance(3, toDeposit);
+            ATMProcess.UpdateBalance(Actions.Deposit, toDeposit);
             DisplayBalance();
         }
     }

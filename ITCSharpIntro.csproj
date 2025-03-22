@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ATM_BusinessDataLogic\**" />
+    <EmbeddedResource Remove="ATM_BusinessDataLogic\**" />
+    <None Remove="ATM_BusinessDataLogic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="ATM_BusinessDataLogic\ATM_BusinessDataLogic.csproj" />
+  </ItemGroup>
+
 </Project>

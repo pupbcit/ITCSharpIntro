@@ -9,7 +9,7 @@ namespace ATM_BusinessDataLogic
 {
     public class ATMService
     {
-        public static double balance = 10000.0;
+        private static double balance = 10000.0;
         static int pin = 1234;
         static double minWithdrawAmount = 500;
 

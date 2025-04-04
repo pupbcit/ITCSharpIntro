@@ -19,12 +19,12 @@ namespace ITCSharpIntro
                 Console.Write("Enter PIN: ");
                 userPin = Convert.ToInt16(Console.ReadLine());
 
-                if (!ATMServices.ValidatePIN(userPin))
+                if (!ATMService.ValidatePIN(userPin))
                 {
                     Console.WriteLine("FAILED: Incorrect PIN. Please try again.");
                 }
 
-            } while (!ATMServices.ValidatePIN(userPin));
+            } while (!ATMService.ValidatePIN(userPin));
 
             DisplayActions();
             int userInput = GetUserInput();
@@ -77,7 +77,7 @@ namespace ITCSharpIntro
         
         static void DisplayBalance()
         {
-            Console.WriteLine($"AVAILABLE BALANCE: {ATMServices.balance}");
+            Console.WriteLine($"AVAILABLE BALANCE: {ATMService.balance}");
         }
 
         static void Withdraw()
@@ -87,9 +87,9 @@ namespace ITCSharpIntro
             Console.WriteLine("Enter amount to WITHDRAW");
             double toWithdraw = Convert.ToDouble(GetUserInput());
 
-            if (ATMServices.CheckAmountToWithdraw(toWithdraw))
+            if (ATMService.CheckAmountToWithdraw(toWithdraw))
             {
-                ATMServices.UpdateBalance(Actions.Withdraw, toWithdraw);
+                ATMService.UpdateBalance(Actions.Withdraw, toWithdraw);
             }
             else
             {
@@ -105,7 +105,7 @@ namespace ITCSharpIntro
             Console.WriteLine("DEPOSIT MONEY");
             Console.WriteLine("Enter amount to DEPOSIT");
             double toDeposit = Convert.ToDouble(GetUserInput());
-            ATMServices.UpdateBalance(Actions.Deposit, toDeposit);
+            ATMService.UpdateBalance(Actions.Deposit, toDeposit);
             DisplayBalance();
         }
     }

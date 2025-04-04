@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace ATM_BusinessDataLogic
 {
-    public class ATMProcess
+    public class ATMServices
     {
         public static double balance = 10000.0;
         static int pin = 1234;

@@ -11,6 +11,7 @@ namespace ATM_BusinessDataLogic
     {
         public static double balance = 10000.0;
         static int pin = 1234;
+        static double minWithdrawAmount = 500;
 
         public static bool UpdateBalance(Actions userAction, double amount)
         {
@@ -31,7 +32,7 @@ namespace ATM_BusinessDataLogic
 
         public static bool CheckAmountToWithdraw(double amount)
         {
-            return amount >= 500 && amount <= balance;
+            return amount >= minWithdrawAmount && amount <= balance;
         }
 
         public static bool ValidatePIN(int userPin)

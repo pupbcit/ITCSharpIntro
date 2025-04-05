@@ -5,7 +5,11 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCSharpIntro", "ITCSharpIntro.csproj", "{F438C699-F63B-4D9D-A4D6-CE30948F0001}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM_BusinessDataLogic", "ATM_BusinessDataLogic\ATM_BusinessDataLogic.csproj", "{81899912-77DE-440D-52FA-CF091024D8F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMService", "ATM_BusinessDataLogic\ATMService.csproj", "{81899912-77DE-440D-52FA-CF091024D8F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMDataService", "ATMDataService\ATMDataService.csproj", "{9DB0594D-EC60-4D87-8BF7-44F8A59D8A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMCommon", "ATMCommon\ATMCommon.csproj", "{1ADB2C43-B280-4DEB-A9EC-D7BA94F2F086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{81899912-77DE-440D-52FA-CF091024D8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81899912-77DE-440D-52FA-CF091024D8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81899912-77DE-440D-52FA-CF091024D8F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB0594D-EC60-4D87-8BF7-44F8A59D8A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB0594D-EC60-4D87-8BF7-44F8A59D8A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB0594D-EC60-4D87-8BF7-44F8A59D8A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB0594D-EC60-4D87-8BF7-44F8A59D8A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ADB2C43-B280-4DEB-A9EC-D7BA94F2F086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADB2C43-B280-4DEB-A9EC-D7BA94F2F086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADB2C43-B280-4DEB-A9EC-D7BA94F2F086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADB2C43-B280-4DEB-A9EC-D7BA94F2F086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

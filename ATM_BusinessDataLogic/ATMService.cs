@@ -1,43 +1,54 @@
-﻿using System;
+﻿using ATMDataService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace ATM_BusinessDataLogic
+namespace ATMService
 {
     public class ATMService
     {
-        private static double balance = 10000.0;
-        static int pin = 1234;
-        static double minWithdrawAmount = 500;
+        double minWithdrawAmount = 500;
+        BankDataService bankDataService = new BankDataService();
 
-        public static bool UpdateBalance(Actions userAction, double amount)
+        public bool UpdateBalance(Actions userAction, double amount, string accountNumber)
         {
+            double balance = bankDataService.GetAccountBalance(accountNumber);
+
             if (userAction == Actions.Withdraw && amount <= balance)
             {
                 balance -= amount;
+                bankDataService.UpdateAccountBalance(accountNumber, balance);
+
                 return true;
             }
 
             if (userAction == Actions.Deposit)
             {
                 balance += amount;
+                bankDataService.UpdateAccountBalance(accountNumber, balance);
+
                 return true;
             }
 
             return false;
         }
 
-        public static bool CheckAmountToWithdraw(double amount)
+        public bool CheckAmountToWithdraw(double amount)
         {
-            return amount >= minWithdrawAmount && amount <= balance;
+            return amount >= minWithdrawAmount;
         }
 
-        public static bool ValidatePIN(int userPin)
+        public bool ValidateAccount(string accountNumber, string userPin)
         {
-            return userPin == pin;
+            return bankDataService.ValidateBankAccount(accountNumber, userPin);
+        }
+
+        public double GetAccountBalance(string accountNumber)
+        {
+            return bankDataService.GetAccountBalance(accountNumber);
         }
     }
 }

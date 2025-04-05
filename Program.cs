@@ -1,33 +1,39 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using ATM_BusinessDataLogic;
+using System.Transactions;
+using ATMService;
 
 namespace ITCSharpIntro
 {
     internal class Program
     {
         static string[] actions = new string[] { "[1] View Balance", "[2] Withdraw", "[3] Deposit", "[4] Exit" };
+        static string accountNumber = string.Empty;
+        static ATMService.ATMService atmService = new ATMService.ATMService();
 
         static void Main(string[] args)
         {
             Console.WriteLine("WELCOME");
 
-            int userPin = 0;
+            string userPin = string.Empty;
 
             do
             {
-                Console.Write("Enter PIN: ");
-                userPin = Convert.ToInt16(Console.ReadLine());
+                Console.Write("Enter Account Number: ");
+                accountNumber = Console.ReadLine();
 
-                if (!ATMService.ValidatePIN(userPin))
+                Console.Write("Enter PIN: ");
+                userPin = Console.ReadLine();
+
+                if (!atmService.ValidateAccount(accountNumber, userPin))
                 {
                     Console.WriteLine("FAILED: Incorrect PIN. Please try again.");
                 }
 
-            } while (!ATMService.ValidatePIN(userPin));
+            } while (!atmService.ValidateAccount(accountNumber, userPin));
 
             DisplayActions();
-            int userInput = GetUserInput();
+            double userInput = GetUserInput();
 
             while (userInput != 4)
             {
@@ -66,10 +72,10 @@ namespace ITCSharpIntro
             }
         }
 
-        static int GetUserInput() //method with return value
+        static double GetUserInput() //method with return value
         {
             Console.Write("[User Input]: ");
-            int userInput = Convert.ToInt16(Console.ReadLine());
+            double userInput = Convert.ToDouble(Console.ReadLine());
 
             return userInput;
         }
@@ -77,7 +83,7 @@ namespace ITCSharpIntro
         
         static void DisplayBalance()
         {
-            Console.WriteLine($"AVAILABLE BALANCE: {ATMService.balance}");
+            Console.WriteLine($"AVAILABLE BALANCE: {atmService.GetAccountBalance(accountNumber)}");
         }
 
         static void Withdraw()
@@ -87,9 +93,9 @@ namespace ITCSharpIntro
             Console.WriteLine("Enter amount to WITHDRAW");
             double toWithdraw = Convert.ToDouble(GetUserInput());
 
-            if (ATMService.CheckAmountToWithdraw(toWithdraw))
+            if (atmService.CheckAmountToWithdraw(toWithdraw))
             {
-                ATMService.UpdateBalance(Actions.Withdraw, toWithdraw);
+                atmService.UpdateBalance(Actions.Withdraw, toWithdraw, accountNumber);
             }
             else
             {
@@ -105,7 +111,7 @@ namespace ITCSharpIntro
             Console.WriteLine("DEPOSIT MONEY");
             Console.WriteLine("Enter amount to DEPOSIT");
             double toDeposit = Convert.ToDouble(GetUserInput());
-            ATMService.UpdateBalance(Actions.Deposit, toDeposit);
+            atmService.UpdateBalance(Actions.Deposit, toDeposit, accountNumber);
             DisplayBalance();
         }
     }

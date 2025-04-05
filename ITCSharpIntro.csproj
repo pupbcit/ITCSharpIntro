@@ -8,13 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ATMCommon\**" />
+    <Compile Remove="ATMDataService\**" />
     <Compile Remove="ATM_BusinessDataLogic\**" />
+    <Compile Remove="Common\**" />
+    <Compile Remove="DataService\**" />
+    <EmbeddedResource Remove="ATMCommon\**" />
+    <EmbeddedResource Remove="ATMDataService\**" />
     <EmbeddedResource Remove="ATM_BusinessDataLogic\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="DataService\**" />
+    <None Remove="ATMCommon\**" />
+    <None Remove="ATMDataService\**" />
     <None Remove="ATM_BusinessDataLogic\**" />
+    <None Remove="Common\**" />
+    <None Remove="DataService\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="ATM_BusinessDataLogic\ATM_BusinessDataLogic.csproj" />
+    <ProjectReference Include="ATM_BusinessDataLogic\ATMService.csproj" />
   </ItemGroup>
 
 </Project>

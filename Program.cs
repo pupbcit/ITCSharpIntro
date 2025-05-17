@@ -9,13 +9,13 @@ namespace ITCSharpIntro
     {
         static string[] actions = new string[] { "[1] View Balance", "[2] Withdraw", "[3] Deposit", "[4] Exit" };
         static string accountNumber = string.Empty;
+        static string userPin = string.Empty;
         static ATMService.ATMService atmService = new ATMService.ATMService();
 
         static void Main(string[] args)
         {
-            Console.WriteLine("WELCOME");
+            Console.WriteLine("ATM");
 
-            string userPin = string.Empty;
 
             do
             {
@@ -27,7 +27,7 @@ namespace ITCSharpIntro
 
                 if (!atmService.ValidateAccount(accountNumber, userPin))
                 {
-                    Console.WriteLine("FAILED: Incorrect PIN. Please try again.");
+                    Console.WriteLine("FAILED: Incorrect Number or PIN. Please try again.");
                 }
 
             } while (!atmService.ValidateAccount(accountNumber, userPin));
@@ -80,10 +80,10 @@ namespace ITCSharpIntro
             return userInput;
         }
 
-        
+
         static void DisplayBalance()
         {
-            Console.WriteLine($"AVAILABLE BALANCE: {atmService.GetAccountBalance(accountNumber)}");
+            Console.WriteLine($"AVAILABLE BALANCE: {atmService.GetAccountBalance(accountNumber, userPin)}");
         }
 
         static void Withdraw()
@@ -95,14 +95,14 @@ namespace ITCSharpIntro
 
             if (atmService.CheckAmountToWithdraw(toWithdraw))
             {
-                atmService.UpdateBalance(Actions.Withdraw, toWithdraw, accountNumber);
+                atmService.UpdateBalance(Actions.Withdraw, toWithdraw, accountNumber, userPin);
             }
             else
             {
                 Console.WriteLine("ERROR: Either balance is insufficient or you need to enter amount 500 and above.");
             }
 
-                DisplayBalance();
+            DisplayBalance();
         }
 
         static void Deposit()
@@ -111,7 +111,7 @@ namespace ITCSharpIntro
             Console.WriteLine("DEPOSIT MONEY");
             Console.WriteLine("Enter amount to DEPOSIT");
             double toDeposit = Convert.ToDouble(GetUserInput());
-            atmService.UpdateBalance(Actions.Deposit, toDeposit, accountNumber);
+            atmService.UpdateBalance(Actions.Deposit, toDeposit, accountNumber, userPin);
             DisplayBalance();
         }
     }

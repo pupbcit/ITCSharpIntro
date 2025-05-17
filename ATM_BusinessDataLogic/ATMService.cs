@@ -1,4 +1,5 @@
-﻿using ATMDataService;
+﻿using ATMCommon;
+using ATMDataService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +14,24 @@ namespace ATMService
         double minWithdrawAmount = 500;
         BankDataService bankDataService = new BankDataService();
 
-        public bool UpdateBalance(Actions userAction, double amount, string accountNumber)
+        public bool UpdateBalance(Actions userAction, double amountToUpdate, string accountNumber, string userPin)
         {
-            double balance = bankDataService.GetAccountBalance(accountNumber);
+            var bankAccount = GetBankAccount(accountNumber, userPin);
 
-            if (userAction == Actions.Withdraw && amount <= balance)
+            if (userAction == Actions.Withdraw && amountToUpdate <= bankAccount.Balance)
             {
-                balance -= amount;
-                bankDataService.UpdateAccountBalance(accountNumber, balance);
+                bankAccount.Balance -= amountToUpdate;
+
+                bankDataService.UpdateAccount(bankAccount);
 
                 return true;
             }
 
             if (userAction == Actions.Deposit)
             {
-                balance += amount;
-                bankDataService.UpdateAccountBalance(accountNumber, balance);
+                bankAccount.Balance += amountToUpdate;
+
+                bankDataService.UpdateAccount(bankAccount);
 
                 return true;
             }
@@ -43,12 +46,35 @@ namespace ATMService
 
         public bool ValidateAccount(string accountNumber, string userPin)
         {
-            return bankDataService.ValidateBankAccount(accountNumber, userPin);
+            var account = GetBankAccount(accountNumber, userPin);
+
+            if (account.Number != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public double GetAccountBalance(string accountNumber)
+        private BankAccount GetBankAccount(string accountNumber, string PIN)
         {
-            return bankDataService.GetAccountBalance(accountNumber);
+            var bankAccounts = bankDataService.GetAllAccounts();
+            var foundAccount = new BankAccount();
+
+            foreach (var account in bankAccounts)
+            {
+                if (account.Number == accountNumber && account.PIN == PIN)
+                {
+                    foundAccount = account;
+                }
+            }
+            return foundAccount;
+        }
+
+        public double GetAccountBalance(string accountNumber, string PIN)
+        {
+            var bankAccount = GetBankAccount(accountNumber, PIN);
+            return bankAccount.Balance;
         }
     }
 }

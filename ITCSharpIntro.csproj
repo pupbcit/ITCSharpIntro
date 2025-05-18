@@ -11,16 +11,19 @@
     <Compile Remove="ATMCommon\**" />
     <Compile Remove="ATMDataService\**" />
     <Compile Remove="ATM_BusinessDataLogic\**" />
+    <Compile Remove="ATM_Desktop\**" />
     <Compile Remove="Common\**" />
     <Compile Remove="DataService\**" />
     <EmbeddedResource Remove="ATMCommon\**" />
     <EmbeddedResource Remove="ATMDataService\**" />
     <EmbeddedResource Remove="ATM_BusinessDataLogic\**" />
+    <EmbeddedResource Remove="ATM_Desktop\**" />
     <EmbeddedResource Remove="Common\**" />
     <EmbeddedResource Remove="DataService\**" />
     <None Remove="ATMCommon\**" />
     <None Remove="ATMDataService\**" />
     <None Remove="ATM_BusinessDataLogic\**" />
+    <None Remove="ATM_Desktop\**" />
     <None Remove="Common\**" />
     <None Remove="DataService\**" />
   </ItemGroup>

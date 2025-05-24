@@ -10,7 +10,8 @@ namespace ATMDataService
         {
             //bankDataService = new TextFileDataService();
             //bankDataService = new InMemoryDataService();
-            bankDataService = new JsonFileDataService();
+            //bankDataService = new JsonFileDataService();
+            bankDataService = new DBDataService();
 
         }
         public List<BankAccount> GetAllAccounts()

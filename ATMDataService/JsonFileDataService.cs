@@ -44,10 +44,11 @@ namespace ATMDataService
             return -1;
         }
 
-        public void CreateAccount(BankAccount bankAccount)
+        public bool CreateAccount(BankAccount bankAccount)
         {
             bankAccounts.Add(bankAccount);
             WriteJsonDataToFile();
+            return true;
         }
 
         public List<BankAccount> GetAccounts()
@@ -55,12 +56,14 @@ namespace ATMDataService
             return bankAccounts;
         }
 
-        public void RemoveAccount(BankAccount bankAccount)
+        public bool RemoveAccount(BankAccount bankAccount)
         {
             var index = FindAccountIndex(bankAccount.Number, bankAccount.PIN);
 
             bankAccounts.RemoveAt(index);
             WriteJsonDataToFile();
+
+            return true;
 
         }
 

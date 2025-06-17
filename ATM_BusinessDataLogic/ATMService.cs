@@ -71,10 +71,36 @@ namespace ATMService
             return foundAccount;
         }
 
+        public List<BankAccount> GetBankAccounts()
+        {
+            return bankDataService.GetAllAccounts();
+        }
         public double GetAccountBalance(string accountNumber, string PIN)
         {
             var bankAccount = GetBankAccount(accountNumber, PIN);
             return bankAccount.Balance;
+        }
+
+
+        public bool DeleteBankAccount(string accountNumber, string PIN)
+        {
+            var bankAccount = new BankAccount { Number = accountNumber, PIN = PIN };
+
+            return bankDataService.RemoveAccount(bankAccount);
+        }
+
+        public bool AddBankAccount(string number, string name, string PIN, double balance,  string bank)
+        {
+            var bankAccount = new BankAccount
+            {
+                Number = number,
+                PIN = PIN,
+                Balance = balance, 
+                Name = name, 
+                Bank = bank
+            };
+
+            return bankDataService.AddAccount(bankAccount);
         }
     }
 }

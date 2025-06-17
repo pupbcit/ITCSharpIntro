@@ -10,9 +10,9 @@ namespace ATMDataService
     public interface IBankDataService
     {
         public List<BankAccount> GetAccounts();
-        public void CreateAccount(BankAccount bankAccount);
+        public bool CreateAccount(BankAccount bankAccount);
         public void UpdateAccount(BankAccount bankAccount);
-        public void RemoveAccount(BankAccount bankAccount);
+        public bool RemoveAccount(BankAccount bankAccount);
 
     }
 }

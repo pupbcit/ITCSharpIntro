@@ -19,9 +19,9 @@ namespace ATMDataService
             return bankDataService.GetAccounts();
         }
 
-        public void AddAccount(BankAccount bankAccount)
+        public bool AddAccount(BankAccount bankAccount)
         {
-            bankDataService.CreateAccount(bankAccount);
+           return bankDataService.CreateAccount(bankAccount);
         }
 
         public void UpdateAccount(BankAccount bankAccount)
@@ -29,9 +29,9 @@ namespace ATMDataService
             bankDataService.UpdateAccount(bankAccount);
         }
 
-        public void RemoveAccount(BankAccount bankAccount)
+        public bool RemoveAccount(BankAccount bankAccount)
         {
-            bankDataService.RemoveAccount(bankAccount);
+           return bankDataService.RemoveAccount(bankAccount);
         }
     }
 }

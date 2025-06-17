@@ -54,9 +54,9 @@ namespace ATMDataService
                 Bank = "BPI"
             });
         }
-        public void CreateAccount(BankAccount bankAccount)
+        public bool CreateAccount(BankAccount bankAccount)
         {
-            
+            return true;
         }
 
         public List<BankAccount> GetAccounts()
@@ -64,8 +64,9 @@ namespace ATMDataService
             return accounts;
         }
 
-        public void RemoveAccount(BankAccount bankAccount)
+        public bool RemoveAccount(BankAccount bankAccount)
         {
+            return true;
             
         }
 

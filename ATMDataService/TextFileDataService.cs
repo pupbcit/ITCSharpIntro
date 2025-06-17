@@ -64,11 +64,13 @@ namespace ATMDataService
             return bankAccounts;
         }
 
-        public void CreateAccount(BankAccount bankAccount)
+        public bool CreateAccount(BankAccount bankAccount)
         {
             var newLine = $"{bankAccount.Name}|{bankAccount.Number}|{bankAccount.Bank}|{bankAccount.Balance}|{bankAccount.PIN}";
 
             File.AppendAllText(filePath, newLine);
+
+            return true;
         }
 
         public void UpdateAccount(BankAccount account)
@@ -82,7 +84,7 @@ namespace ATMDataService
 
         }
 
-        public void RemoveAccount(BankAccount account)
+        public bool RemoveAccount(BankAccount account)
         {
             int index = -1;
             for (int i = 0; i < bankAccounts.Count; i++)
@@ -96,6 +98,8 @@ namespace ATMDataService
             bankAccounts.RemoveAt(index);
 
             WriteDataToFile();
+
+            return true;
         }
     }
 }

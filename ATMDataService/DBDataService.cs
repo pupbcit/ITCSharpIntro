@@ -18,7 +18,7 @@ namespace ATMDataService
         }
 
 
-        public void CreateAccount(BankAccount bankAccount)
+        public bool CreateAccount(BankAccount bankAccount)
         {
             var insertStatement = "INSERT INTO BankDetails VALUES (@AccountNumber, @AccountName, @Bank, @PIN, @Balance)";
 
@@ -31,9 +31,10 @@ namespace ATMDataService
             insertCommand.Parameters.AddWithValue("@Balance", bankAccount.Balance);
             sqlConnection.Open();
 
-            insertCommand.ExecuteNonQuery();
+            int rowsAffected = insertCommand.ExecuteNonQuery();
 
             sqlConnection.Close();
+            return rowsAffected > 0;
 
         }
 
@@ -68,7 +69,7 @@ namespace ATMDataService
 
         }
 
-        public void RemoveAccount(BankAccount bankAccount)
+        public bool RemoveAccount(BankAccount bankAccount)
         {
             sqlConnection.Open();
 
@@ -76,9 +77,11 @@ namespace ATMDataService
             SqlCommand updateCommand = new SqlCommand(deleteStatement, sqlConnection);
             updateCommand.Parameters.AddWithValue("@AccountNumber", bankAccount.Number);
 
-            updateCommand.ExecuteNonQuery();
+            int rowsAffected = updateCommand.ExecuteNonQuery();
 
             sqlConnection.Close();
+
+            return rowsAffected > 0;
         }
 
         public void UpdateAccount(BankAccount bankAccount)

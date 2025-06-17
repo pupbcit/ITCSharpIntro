@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Transactions;
+using ATMCommon;
 using ATMService;
 
 namespace ITCSharpIntro
 {
     internal class Program
     {
-        static string[] actions = new string[] { "[1] View Balance", "[2] Withdraw", "[3] Deposit", "[4] Exit" };
+        static string[] actions = new string[] { "[1] View Balance", "[2] Withdraw", "[3] Deposit", "[4] Add", "[5] Exit" };
         static string accountNumber = string.Empty;
         static string userPin = string.Empty;
         static ATMService.ATMService atmService = new ATMService.ATMService();
@@ -16,6 +17,16 @@ namespace ITCSharpIntro
         {
             Console.WriteLine("ATM");
 
+            var accounts = atmService.GetBankAccounts();
+
+            foreach (var account in accounts)
+            {
+                Console.WriteLine(account.Name);
+                Console.WriteLine(account.Number);
+                Console.WriteLine(account.Balance);
+            }
+
+            AddAccount();
 
             do
             {
@@ -49,6 +60,9 @@ namespace ITCSharpIntro
                         Deposit();
                         break;
                     case 4:
+                        AddAccount();
+                        break;
+                    case 5:
                         Console.WriteLine("Exit");
                         break;
                     default:
@@ -59,6 +73,31 @@ namespace ITCSharpIntro
                 userInput = GetUserInput();
             }
 
+        }
+
+        private static void AddAccount()
+        {
+            Console.WriteLine("ADD BANKACCOUNT");
+            
+            Console.Write("Name");
+            string accountName = Console.ReadLine();
+            Console.Write("Number");
+            string accountNumber = Console.ReadLine();
+            Console.Write("PIN");
+            string PIN = Console.ReadLine();
+            Console.Write("Bank");
+            string bankName = Console.ReadLine();
+            Console.Write("Balance");
+            double balance = Convert.ToDouble(Console.ReadLine());
+
+            //if(atmService.AddBankAccount(accountNumber, PIN, balance, accountName, bankName))
+            //{
+            //    Console.WriteLine("Successfully added.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Error when adding.");
+            //}
         }
 
         static void DisplayActions() //simple method -- no return, no parameter

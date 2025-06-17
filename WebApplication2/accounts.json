@@ -1,0 +1,16 @@
+[
+  {
+    "PIN": "1234",
+    "Balance": 3500.5,
+    "Name": "John Doe",
+    "Number": "123456",
+    "Bank": "ABC Bank"
+  },
+  {
+    "PIN": "5678",
+    "Balance": 2000.75,
+    "Name": "Jane Smith",
+    "Number": "654321",
+    "Bank": "XYZ Bank"
+  }
+]
